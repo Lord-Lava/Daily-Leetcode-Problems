@@ -1,31 +1,44 @@
+class node{
+    public:
+    int data;
+    node* next;
+    int min;
+    node(int data,int min){
+        this->data = data;
+        next = NULL;
+        this->min = min;
+    }
+};
+
 class MinStack {
-    stack<int>st;
-    stack<int>curr_min;
+    node* Top;
 public:
     MinStack() {
-        
+        Top = NULL;
     }
     
     void push(int val) {
-        st.push(val);
-        if(curr_min.empty()){
-            curr_min.push(val);
+        if(Top==NULL){
+            Top = new node(val,val);
         }else{
-            curr_min.push(min(curr_min.top(),val));
+            node* temp = new node(val,min(val,Top->min));
+            temp->next = Top;
+            Top = temp;
         }
     }
     
     void pop() {
-        st.pop();
-        curr_min.pop();
+        node* to_delete = Top;
+        Top = Top->next;
+        delete to_delete;
     }
     
     int top() {
-        return st.top();
+        return Top->data;
     }
     
     int getMin() {
-        return curr_min.top();
+        return Top->min;
     }
 };
 
