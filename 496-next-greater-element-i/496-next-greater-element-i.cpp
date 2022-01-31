@@ -8,7 +8,7 @@ public:
         
         int n1 = nums1.size(), n2 = nums2.size();
         
-        for(int i = 1; i < n2 ;i++ ){
+        for(int i = 0; i < n2 ;i++ ){
             int next = nums2[i];
             while(!st.empty() && st.top()<next){
                 mp[st.top()] = next;
