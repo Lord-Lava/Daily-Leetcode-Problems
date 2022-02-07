@@ -7,21 +7,23 @@ public:
     }
     
     int next(int price) {
-        int res = 1;
-        bool fl = 0;
-        while(!st.empty() && st.top().first<=price)
-            st.pop(),fl=1;
+        bool flag = 0;
+        int ans = 1;
+        while(!st.empty() && st.top().second<=price){
+            st.pop(); 
+            flag = 1;
+        }
+        if(st.empty() && flag ==1){
+            ans = index+1;
+        }
+        if(!st.empty()){
+            ans = index - st.top().first;
+        }
         
-        if(!st.empty())
-            res = index - st.top().second;
-        if(st.empty() && fl == 1)
-            res = index+1;
-        
-        st.push({price,index});
-        
+        st.push({index,price});
         index++;
         
-        return res;
+        return ans;
     }
 };
 
