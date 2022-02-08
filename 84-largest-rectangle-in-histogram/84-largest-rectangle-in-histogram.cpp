@@ -1,47 +1,54 @@
 class Solution {
 public:
-    vector<int> nse(vector<int>& heights){
+    vector<int> next_smaller_element(vector<int>& heights){
         int n = heights.size();
-        vector<int>nse(n,n);
+        vector<int> nse(n,n);
         stack<int>st;
-        
-        for(int i = n-1;i>=0;i--){
-            while(!st.empty() && heights[st.top()]>=heights[i])
+        for(int i = n-1 ;i>=0 ;i--){
+            while(!st.empty() && heights[st.top()] >= heights[i])
                 st.pop();
+            
             if(!st.empty()){
                 nse[i] = st.top();
             }
+            
             st.push(i);
         }
+        
         return nse;
     }
-        
-    vector<int> pse(vector<int>& heights){
+    
+    vector<int> prev_smaller_element(vector<int>& heights){
         int n = heights.size();
-        vector<int>pse(n,-1);
+        vector<int> pse(n,-1);
         stack<int>st;
-        
-        for(int i = 0;i<n;i++){
-            while(!st.empty() && heights[st.top()]>=heights[i])
+        for(int i = 0 ;i<n ;i++){
+            while(!st.empty() && heights[st.top()] >= heights[i])
                 st.pop();
+            
             if(!st.empty()){
                 pse[i] = st.top();
             }
+            
             st.push(i);
         }
         return pse;
     }
     
     int largestRectangleArea(vector<int>& heights) {
-        int maxi = INT_MIN;
+        int max_area = INT_MIN;
         int n = heights.size();
-        vector<int>next = nse(heights), prev = pse(heights);
+        vector<int> nse = next_smaller_element(heights);
+        vector<int> pse = prev_smaller_element(heights);
         
-        for(int i = 0;i<n;i++){
-            int base = next[i] - prev[i] - 1;
-            int area = heights[i] * base;
-            maxi = max(maxi,area);
+        for(int i = 0; i < n ; i++){
+            int height = heights[i];
+            int width = nse[i] - pse[i] - 1;
+            int area = height * width;
+            
+            max_area = max(max_area,area);
         }
-        return maxi;
+        
+        return max_area;
     }
 };
