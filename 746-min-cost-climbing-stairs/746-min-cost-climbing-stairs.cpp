@@ -4,9 +4,9 @@ class Solution {
     
         if(dp[i]!=-1)return dp[i];
         
-        return dp[i] = min(
-            cost[i] + minCost(i+1,dp,n,cost),
-            cost[i] + minCost(i+2,dp,n,cost)
+        return dp[i] = cost[i] + min(
+            minCost(i+1,dp,n,cost),
+            minCost(i+2,dp,n,cost)
         );
     }
 public:
