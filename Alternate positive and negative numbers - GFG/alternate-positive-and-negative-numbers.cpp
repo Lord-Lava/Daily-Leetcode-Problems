@@ -18,31 +18,25 @@ public:
 	            neg.push_back(arr[i]);
 	    }
 	    
-	    vector<int>ans;
-	    
-	    size_t i=0,j=0;
+	    size_t i=0,j=0,k=0;
 	    bool flag=1;
 	    while(i<(size_t)pos.size() && j<(size_t)neg.size()){
 	        if(flag==1){
-	            ans.push_back(pos[i++]);
+	            arr[k++] = pos[i++];
 	            flag=0;
 	        }else{
-	            ans.push_back(neg[j++]);
+	            arr[k++] = neg[j++];
 	            flag=1;
 	        }
 	    }
 	    
 	    if(flag = 0){
-	        while(j<(size_t)neg.size()) ans.push_back(neg[j++]);
-	        while(i<(size_t)pos.size()) ans.push_back(pos[i++]);
+	        while(j<(size_t)neg.size()) arr[k++] = neg[j++];
+	        while(i<(size_t)pos.size()) arr[k++] = pos[i++];
 	    }else{
-	        while(i<(size_t)pos.size()) ans.push_back(pos[i++]);
-	        while(j<(size_t)neg.size()) ans.push_back(neg[j++]);
+	        while(i<(size_t)pos.size()) arr[k++] = pos[i++];
+	        while(j<(size_t)neg.size()) arr[k++] = neg[j++];
 	    }
-	   
-	   for(size_t i=0;i<n;i++){
-	       arr[i] = ans[i];
-	   }
 	}
 };
 
